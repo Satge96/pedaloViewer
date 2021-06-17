@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kml xmlns="http://www.opengis.net/kml/2.2" xmlns:gx="http://www.google.com/kml/ext/2.2">
+    <Document id="1">
+        <Style id="3">
+            <LineStyle id="4">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>5</width>
+            </LineStyle>
+        </Style>
+        <Style id="9">
+            <LineStyle id="10">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>5</width>
+            </LineStyle>
+        </Style>
+        <Style id="15">
+            <LineStyle id="16">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>5</width>
+            </LineStyle>
+        </Style>
+        <Style id="21">
+            <LineStyle id="22">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>5</width>
+            </LineStyle>
+        </Style>
+        <Style id="27">
+            <LineStyle id="28">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>5</width>
+            </LineStyle>
+        </Style>
+        <Style id="33">
+            <LineStyle id="34">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>5</width>
+            </LineStyle>
+        </Style>
+        <Style id="39">
+            <LineStyle id="40">
+                <color>ff0000ff</color>
+                <colorMode>normal</colorMode>
+                <width>5</width>
+            </LineStyle>
+        </Style>
+        <name>Basics</name>
+        <open>1</open>
+        <Document id="2">
+            <name>Pedalo viewer</name>
+        </Document>
+        <Placemark id="6">
+            <name>Restricted Area</name>
+            <description>Restricted Area, Ufenau</description>
+            <styleUrl>#3</styleUrl>
+            <Polygon id="5">
+                <outerBoundaryIs>
+                    <LinearRing id="7">
+                        <coordinates>8.779317332619115,47.21607981607743,0.0 8.780111309784358,47.21562481834747,0.0 8.782321475915136,47.21572858962171,0.0 8.784516819320428,47.21650179277285,0.0 8.786319885283499,47.21721477532972,0.0 8.786067097053905,47.21808134758944,0.0 8.78467055615003,47.218831752022126,0.0 8.783076472278912,47.21928937839176,0.0 8.780878704266732,47.21926463983675,0.0 8.778429760644817,47.218911730867745,0.0 8.775277233451243,47.21830065892753,0.0 8.7728050966669,47.21786153930147,0.0 8.770870133091082,47.21778318784683,0.0 8.769570895195496,47.21693460146372,0.0 8.769911072821227,47.21490118264787,0.0 8.771949520754402,47.21447457709156,0.0 8.775404348619837,47.21451368370895,0.0 8.777657103410602,47.21547661418546,0.0 8.778144850010197,47.215972915999686,0.0 8.778214066593252,47.21620600586808,0.0 8.778853638363433,47.216227350473694,0.0 8.779317332619115,47.21607981607743,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="12">
+            <name>Restricted Area</name>
+            <description>Restricted Area, Tannlifelsen</description>
+            <styleUrl>#9</styleUrl>
+            <Polygon id="11">
+                <outerBoundaryIs>
+                    <LinearRing id="13">
+                        <coordinates>8.809886545804185,47.22528213933158,0.0 8.809463060577576,47.225452707413716,0.0 8.809082762623083,47.22545363533813,0.0 8.808783173858503,47.225306067245896,0.0 8.80865720129424,47.22513124426307,0.0 8.808779785279576,47.22496785779225,0.0 8.809284784183916,47.22488628189717,0.0 8.809773827077644,47.225006404391586,0.0 8.809886545804185,47.22528213933158,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="18">
+            <name>Restricted Area</name>
+            <description>Restricted Area, Kempraten</description>
+            <styleUrl>#15</styleUrl>
+            <Polygon id="17">
+                <outerBoundaryIs>
+                    <LinearRing id="19">
+                        <coordinates>8.817363547106346,47.234803305128295,0.0 8.809010647558775,47.227108734860614,0.0 8.809519729655126,47.226832835945665,0.0 8.81108308453889,47.22694504769909,0.0 8.811866864935444,47.2270828902221,0.0 8.81758252202836,47.228551869352216,0.0 8.818172605355292,47.231414924873775,0.0 8.818085541224466,47.23315766467116,0.0 8.817363547106346,47.234803305128295,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="24">
+            <name>Restricted Area</name>
+            <description>Restricted Area, Gubelfelsen</description>
+            <styleUrl>#21</styleUrl>
+            <Polygon id="23">
+                <outerBoundaryIs>
+                    <LinearRing id="25">
+                        <coordinates>8.800112026551856,47.23006027765898,0.0 8.79970104645144,47.22999856492534,0.0 8.799205203646425,47.22992345972329,0.0 8.79883122421264,47.22975875275294,0.0 8.798314443581582,47.229691087830716,0.0 8.798013710649528,47.229809786025896,0.0 8.79814058824282,47.23012494676815,0.0 8.798712198186141,47.23027112960389,0.0 8.799501970692415,47.2303751498979,0.0 8.799903353325112,47.230474759902926,0.0 8.800399367891774,47.23045270356415,0.0 8.80041589089386,47.23016823537363,0.0 8.800112026551856,47.23006027765898,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="30">
+            <name>Restricted Area</name>
+            <description>Restricted Area, Seedamm</description>
+            <styleUrl>#27</styleUrl>
+            <Polygon id="29">
+                <outerBoundaryIs>
+                    <LinearRing id="31">
+                        <coordinates>8.813110327501583,47.22380479562882,0.0 8.811449688725643,47.22279905854997,0.0 8.808656814571224,47.22037685728182,0.0 8.807980139939753,47.21973449422632,0.0 8.8078191684737,47.21955360937596,0.0 8.808537825785825,47.21913457369756,0.0 8.808875366383424,47.21880670072428,0.0 8.811927140015618,47.217743927775366,0.0 8.814988887735016,47.218080362458345,0.0 8.815983029351038,47.21907268355745,0.0 8.817976491976914,47.21921379887887,0.0 8.820445624996442,47.2194280745667,0.0 8.821019954040915,47.22005957108601,0.0 8.816865173331351,47.22143636357781,0.0 8.81658119844737,47.22226464692539,0.0 8.815555431940027,47.223316988420656,0.0 8.81502415907295,47.2239473824385,0.0 8.813110327501583,47.22380479562882,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="36">
+            <name>Restricted Area</name>
+            <description>Restricted Area, Seefeld</description>
+            <styleUrl>#33</styleUrl>
+            <Polygon id="35">
+                <outerBoundaryIs>
+                    <LinearRing id="37">
+                        <coordinates>8.80777804116726,47.218855287785416,0.0 8.80888411734543,47.21832396021723,0.0 8.808601957459878,47.21761843105953,0.0 8.808179120088917,47.21678143339454,0.0 8.808067059064621,47.21467499756218,0.0 8.807333799032738,47.21243830750093,0.0 8.804966596800945,47.21155962447599,0.0 8.80218741465462,47.21108879528742,0.0 8.799904187334496,47.2085249586105,0.0 8.799512489455513,47.20641372409617,0.0 8.7981848027772,47.20653016684223,0.0 8.797067526475006,47.20994025311941,0.0 8.799250807725938,47.21314494197236,0.0 8.80777804116726,47.218855287785416,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+        <Placemark id="42">
+            <name>Restricted Area</name>
+            <description>Restricted Area, Lützelau</description>
+            <styleUrl>#39</styleUrl>
+            <Polygon id="41">
+                <outerBoundaryIs>
+                    <LinearRing id="43">
+                        <coordinates>8.792019423662664,47.20817666459025,0.0 8.791690857665387,47.20854756385206,0.0 8.790519752567997,47.210369068741166,0.0 8.789695480053373,47.21327545556169,0.0 8.788372267271626,47.216295635226516,0.0 8.787765275922442,47.22049487505434,0.0 8.789469860542154,47.223155691944164,0.0 8.794219959276646,47.22300991472795,0.0 8.79750603504807,47.22241343455842,0.0 8.799469974164126,47.220716988138385,0.0 8.80485594033723,47.21962766774078,0.0 8.80686104440911,47.218520740364546,0.0 8.794192449593755,47.210679428093385,0.0 8.792019423662664,47.20817666459025,0.0</coordinates>
+                    </LinearRing>
+                </outerBoundaryIs>
+            </Polygon>
+        </Placemark>
+    </Document>
+</kml>

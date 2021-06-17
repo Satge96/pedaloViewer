@@ -1,63 +1,245 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <title>Server stats</title>
-    <style>
-      table, td {
-        border: 1px solid #333;
-      }
+<html>
+    <head>
+		<title>Pedalo viewer</title>
+        <link rel="stylesheet" href="http://unpkg.com/leaflet@1.4.0/dist/leaflet.css" />
+        <script src="http://unpkg.com/leaflet@1.4.0/dist/leaflet.js"></script>
+        <script src="./L.KML.js"></script>
+		<link rel="stylesheet" href="customstyle.css">
+		<style>
+			* {
+			  box-sizing: border-box;
+			}
 
-      thead {
-        background-color: #333;
-        color: #fff;
-      }
-    </style>
-  </head>
-  <body>
-    <h1>Server stats</h1>
-    <table>
-      <thead>
-        <tr>
-          <th colspan="2">Memory usage</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td>RSS</td>
-          <td id="rss"></td>
-        </tr>
-        <tr>
-          <td>Heap total</td>
-          <td id="heapTotal"></td>
-        </tr>
-        <tr>
-          <td>Heap used</td>
-          <td id="heapUsed"></td>
-        </tr>
-        <tr>
-          <td>External</td>
-          <td id="external"></td>
-        </tr>
-      </tbody>
-    </table>
-    <script>
-      (function() {
-        const rss = document.getElementById('rss');
-        const heapTotal = document.getElementById('heapTotal');
-        const heapUsed = document.getElementById('heapUsed');
-        const external = document.getElementById('external');
-        const ws = new WebSocket(`ws://${location.host}`);
+			.row {
+			  margin-left:-5px;
+			  margin-right:-5px;
+			}
+			  
+			.columnL {
+			  float: left;
+			  width: 70%;
+			  padding: 5px;
+			}
+			
+			.columnR {
+			  float: left;
+			  width: 30%;
+			  padding: 5px;
+			}
 
-        ws.onmessage = function(event) {
-          const data = JSON.parse(event.data);
+			/* Clearfix (clear floats) */
+			.row::after {
+			  content: "";
+			  clear: both;
+			  display: table;
+			}
 
-          rss.textContent = data.rss;
-          heapTotal.textContent = data.heapTotal;
-          heapUsed.textContent = data.heapUsed;
-          external.textContent = data.external;
-        };
-      })();
-    </script>
-  </body>
+			table {
+			  border-collapse: collapse;
+			  border-spacing: 0;
+			  width: 100%;
+			  border: 1px solid #ddd;
+			}
+
+			th, td {
+			  text-align: left;
+			  padding: 16px;
+			}
+
+			tr:nth-child(even) {
+			  background-color: #f2f2f2;
+			}
+	</style>
+    </head>
+    <body>
+		<!-- <button class="button" onclick="clearTrack()">Clear track</button> -->
+		<!-- <button class="button" onclick="changeRentedState()">Toggle Rented State</button> -->
+		<!-- <button class="button" onclick="setRentedTrue()">Set Rented True</button> -->
+		<!-- <button class="button" onclick="setRentedFalse()">Set Rented False</button> -->
+		
+		
+		<div class="row">
+			<div class="columnL">
+				<div style="width: 69vw; height: 80vh" id="map"></div>
+			 </div>
+			 <div class="columnR">
+				<select id="thingNameSelect" onchange="updateTable()">
+					<option value=null>-</option>
+					<option value="nrf-352656100463176">3176</option>
+					<option value="nrf-352656101498254">Thingy_8254</option>
+					<option value="nrf-352656106109229">DK_9229</option>
+					<option value="nrf-352656108602718">DK_2718</option>
+				</select>
+				<table>
+					<tr>
+						<th>Actual Value</th>
+						<th>Setpoint</th>
+					</tr>
+					<tr>
+						<td><p><b>Rented:</b></p><p id="elemRented">undef</p></td>
+						<td>
+							<select id="selectRented" onchange="selectRentedChanged()">
+								<option value=null>-</option>
+								<option value=true>True</option>
+								<option value=false>False</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><p><b>EDRX interval:</b></p><p id="elemRented">5.12 seconds</p></td>
+						<td>
+							<select id="selectRented" onchange="selectRentedChanged()">
+								<option value=null>10.24</option>
+								<option value=true>True</option>
+								<option value=false>False</option>
+							</select>
+						</td>
+					</tr>
+					<tr>
+						<td><p><b>Battery voltage:</b></p><p id="elemRented">4.12V</p></td>
+						<td>
+						</td>
+					</tr>
+					<tr>
+						<td><button class="button" onclick="clearTrack()">Clear track</button></td>
+						<td><button class="button" onclick="clearTrack()">Storm warning</button></td>
+					</tr>
+				</table>
+			  </div>
+			</div>
+			
+        <script type="text/javascript">		
+			// create map boundry
+			var southWest = L.latLng(47.19119, 8.63983);
+			var northEast = L.latLng(47.26544, 8.95708);
+			var bounds = L.latLngBounds(southWest, northEast);
+			
+			// url to the base map
+			//var url = 'https://wmts20.geo.admin.ch/1.0.0/ch.swisstopo.pixelkarte-farbe/default/current/3857/{z}/{x}/{y}.jpeg';
+			// alternative map, uncomment for use
+            var url = 'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
+			
+			// create basemap
+            const map = new L.Map('map', {center: new L.LatLng(47.22546, 8.81491), zoom: 15, minZoom: 13, maxBounds: bounds });
+			const mapLayer = new L.TileLayer(url, {maxZoom:19});
+            map.addLayer(mapLayer);
+			
+			var regionLayer = null;
+			var trackLayer = null;
+			
+			// state of rented used only for testing
+			var rented = false;
+			
+			// shadow 
+			var shadow = {};
+				
+			// create websocket	
+			const ws = new WebSocket(`ws://${location.host}`);
+			
+			ws.onmessage = function(event) {			
+			
+				const data = JSON.parse(event.data);
+				const parser = new DOMParser();
+				const regionData = data.region;
+				const trackData = data.track
+				
+				console.log("Received:" + data);
+				console.log(typeof data);
+				// make sure the json string contains the required data
+				if(regionData)
+				{
+					console.log('received region data')
+					<!-- console.log(regionData) -->
+					// update layer by removing the old and creating a new one
+					if(regionLayer != null)
+					{
+						map.removeLayer(regionLayer);
+					}
+					const kml = parser.parseFromString(regionData, 'text/xml');
+					regionLayer = new L.KML(kml);
+					map.addLayer(regionLayer);
+				}
+				if(trackData)
+				{
+					console.log('received track data')
+					<!-- console.log(trackData) -->
+					if(trackLayer != null)
+					{
+						map.removeLayer(trackLayer);
+					}
+					const kml = parser.parseFromString(trackData, 'text/xml');
+					trackLayer = new L.KML(kml);
+					map.addLayer(trackLayer);
+				}
+				if(data.hasOwnProperty('shadow'))
+				{
+					console.log("Shadow = " + data.shadow)
+					shadow[data.shadow.thingname] = data.shadow.reported;
+					updateTable();
+					/*if(data.shadow.reported.hasOwnProperty('rented'))
+					{
+						console.log("Rented reported = " + data.shadow.reported.rented);
+						console.log("Rented reported dict =" + shadow['nrf-352656101498254'].rented);
+						var textElem = document.getElementById("elemRented");
+						textElem.innerHTML = data.shadow.reported.rented; 
+					}*/
+				}
+			};
+			function clearTrack() {
+				console.log('clear track')
+				ws.send(JSON.stringify({'clearTrack': true}))
+				if(trackLayer != null)
+				{
+					map.removeLayer(trackLayer);
+				}
+			};
+			function setRentedTrue() {
+				var name = document.getElementById("thingNameSelect").value;
+				ws.send(JSON.stringify({'rented': true, 'name':name}))
+			};
+			function setRentedFalse() {
+				var name = document.getElementById("thingNameSelect").value;
+				ws.send(JSON.stringify({'rented': false, 'name':name}))
+			};
+			function changeRentedState() {
+				var name = document.getElementById("thingNameSelect").value;
+				ws.send(JSON.stringify({'rented': rented, 'name':name}))
+				if(rented)
+				{
+					rented = false;
+				}
+				else
+				{
+					rented = true;
+				}
+				console.log("rented = " + rented.toString());
+			};
+			function selectRentedChanged(){
+				var value = document.getElementById("selectRented").value;				
+				var name = document.getElementById("thingNameSelect").value;
+				if(value != null && name != null)
+				{
+					ws.send(JSON.stringify({'rented': value, 'name':name}))
+					console.log("update rented state to " + value);
+				}
+			}
+			function updateTable(){		
+				var name = document.getElementById("thingNameSelect").value;
+				console.log("name = " + name)
+				var  rented;
+				if(name in shadow)
+				{
+					rented = shadow[name].rented;
+				}
+				else
+				{
+					rented = "undef"
+				}
+				document.getElementById("elemRented").innerHTML = rented;
+			}
+			
+			
+        </script>
+    </body>
 </html>

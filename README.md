@@ -10,6 +10,10 @@ This folder contains the code for the web-app to manually control the states and
 ```sh
 npm install ws
 ```
+* Install express
+```sh
+npm install express
+```
 * Install the aws-sdk, used to communicated with the AWS IoT Device Shadow Service
 ```sh
 npm install aws-sdk
